@@ -91,6 +91,10 @@ func ToStringSliceE(i any) ([]string, error) {
 
 	var a []string
 
+	if nonPointerI, ok := indirect(i); ok {
+		i = nonPointerI
+	}
+
 	switch v := i.(type) {
 	case string:
 		if err := json.Unmarshal([]byte(v), &a); err == nil {

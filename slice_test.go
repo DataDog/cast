@@ -258,7 +258,7 @@ func TestStringSlice(t *testing.T) {
 		{[]any{1, 3}, []string{"1", "3"}, false},
 		{any(1), []string{"1"}, false},
 		{[]error{errors.New("a"), errors.New("b")}, []string{"a", "b"}, false},
-		{`["a", "b"]`, []string{"a", "b"}, false},
+		{"[\"a\", \"b\"]", []string{"a", "b"}, false},
 		{"a b", []string{"a", "b"}, false},
 
 		// Failure cases
