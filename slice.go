@@ -6,6 +6,7 @@
 package cast
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strings"
@@ -90,8 +91,13 @@ func ToStringSliceE(i any) ([]string, error) {
 
 	var a []string
 
+	i, _ = indirect(i)
+
 	switch v := i.(type) {
 	case string:
+		if err := json.Unmarshal([]byte(v), &a); err == nil {
+			return a, nil
+		}
 		return strings.Fields(v), nil
 	case any:
 		str, err := ToStringE(v)
